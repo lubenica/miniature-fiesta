@@ -1,3 +1,3 @@
 # miniature-fiesta
-Python homework
+Python homework.
 Lyubov Ivanova, CL 152
