@@ -1,4 +1,4 @@
-# miniature-fiesta/corpora
+# miniature-fiesta/vk_seshcha
 
 Домашняя работа по созданию корпуса постов Вконтакте жителей города Сеща (Брянская обл.)
 
