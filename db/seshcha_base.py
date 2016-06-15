@@ -1,4 +1,5 @@
 import pymysql
+import re
 
 connection = pymysql.connect(host = 'localhost', user = 'guest1', password = 'n76Je4=wx6H', db = 'guest1_ivanova', charset='utf8mb4')
 cur = connection.cursor()
