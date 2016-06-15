@@ -3,12 +3,24 @@ import re
 
 connection = pymysql.connect(host = 'localhost', user = 'guest1', password = 'n76Je4=wx6H', db = 'guest1_ivanova', charset='utf8mb4')
 cur = connection.cursor()
-cur.execute('CREATE TABLE `people` (`person_id` INT(15), `name` VARCHAR(255), `surname` varchar(255), `sex` INT(1), `bdate` DATE, `posts` VARCHAR(255)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci')
-cur.execute('CREATE TABLE `langs` (`lang_id` INT(5), `lang` VARCHAR(255)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci')
-cur.execute('CREATE TABLE `pl` (`connection_id` INT(10), `person_id` INT(15), `lang_id` INT(5)) DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci')
+
+try:
+    cur.execute('CREATE TABLE `people` (`person_id` INT(15), `name` VARCHAR(255), `surname` varchar(255), `sex` INT(1), `bdate` DATE, `posts` VARCHAR(255)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci')
+except:
+    continue
+try:
+    cur.execute('CREATE TABLE `langs` (`lang_id` INT(5), `lang` VARCHAR(255)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci')
+except:
+    continue
+try:
+    cur.execute('CREATE TABLE `pl` (`connection_id` INT(10), `person_id` INT(15), `lang_id` INT(5)) DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci')
+except:
+    continue
+
 sql1 = 'INSERT INTO `people` (`person_id`, `name`, `surname`, `sex`, `bdate`, `posts`) VALUES (%c, %s, %s, %c, %c, %s)'
 sql2 = 'INSERT INTO `langs` (`lang_id`, `lang`) VALUES (%c, %s)'
 sql3 = 'INSERT INTO `pl` (`connection_id`, `person_id`, `lang_id`) VALUES (%c, %c, %c)'
+
 f = open('seshcha.csv', encoding = 'utf8')
 for line in f[1:]:
     info = line.split(';')
@@ -30,6 +42,7 @@ for line in f[1:]:
             lId += 1
         cur.execute(sql3, (cId, pId, lId))
         cId += 1
+
 connection.commit()
 cur.close()
 connection.close()
