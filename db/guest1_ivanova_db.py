@@ -24,7 +24,7 @@ sql1 = 'INSERT INTO `people` (`person_id`, `name`, `surname`, `sex`, `bdate`, `p
 sql2 = 'INSERT INTO `langs` (`lang_id`, `lang`) VALUES (%c, %s)'
 sql3 = 'INSERT INTO `pl` (`connection_id`, `person_id`, `lang_id`) VALUES (%c, %c, %c)'
 
-f = open('seshcha.csv', encoding = 'utf8')
+f = open('seshcha.csv', encoding = 'utf8').readlines()
 for line in f[1:]:
     info = line.split(';')
     nm = line[0]
