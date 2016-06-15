@@ -7,16 +7,19 @@ cur = connection.cursor()
 try:
     cur.execute('CREATE TABLE `people` (`person_id` INT(15), `name` VARCHAR(255), `surname` varchar(255), `sex` INT(1), `bdate` DATE, `posts` VARCHAR(255)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci')
 except:
-    continue
+    cur.execute('DROP TABLE `people`')
+    cur.execute('CREATE TABLE `people` (`person_id` INT(15), `name` VARCHAR(255), `surname` varchar(255), `sex` INT(1), `bdate` DATE, `posts` VARCHAR(255)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci')
 try:
     cur.execute('CREATE TABLE `langs` (`lang_id` INT(5), `lang` VARCHAR(255)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci')
 except:
-    continue
+    cur.execute('DROP TABLE `langs`')
+    cur.execute('CREATE TABLE `langs` (`lang_id` INT(5), `lang` VARCHAR(255)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci')
 try:
     cur.execute('CREATE TABLE `pl` (`connection_id` INT(10), `person_id` INT(15), `lang_id` INT(5)) DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci')
 except:
-    continue
-
+    cur.execute('DROP TABLE `pl`')
+    cur.execute('CREATE TABLE `pl` (`connection_id` INT(10), `person_id` INT(15), `lang_id` INT(5)) DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci')
+    
 sql1 = 'INSERT INTO `people` (`person_id`, `name`, `surname`, `sex`, `bdate`, `posts`) VALUES (%c, %s, %s, %c, %c, %s)'
 sql2 = 'INSERT INTO `langs` (`lang_id`, `lang`) VALUES (%c, %s)'
 sql3 = 'INSERT INTO `pl` (`connection_id`, `person_id`, `lang_id`) VALUES (%c, %c, %c)'
