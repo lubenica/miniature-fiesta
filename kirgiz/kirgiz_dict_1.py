@@ -15,8 +15,8 @@ def dictionary(directory, dic):
                 line = line.lower()
                 line = re.split('\s', line)
                 for word in line:
-                    word = word.strip('[()«»“”„=\'",.†—%<>-—„”?!:;]')
-                    word = re.sub('[\(\)«»“”„\[\]=\\\'\"\,\.†—%\<\>\-—„”\?\!\:\;]', '\n', word)
+                    word = word.strip('[()«»“”„=\'",.†—%<>-—„”?!:;*]')
+                    word = re.sub('[\(\)«»“”„\[\]=\\\'\"\,\.†—%\<\>\-—„”\?\!\:\;\*]', '\n', word)
                     match = re.search('\d|=|\.', word)
                     if match == None and word != '–' and word != '':
                         if word not in words:
@@ -43,7 +43,7 @@ def morphemes(dic, morph):
                 if line[i:-1] not in morphs:
                     for line1 in fDic:
                         if (len(line1) - 1) > -i:
-                            match = re.match(re.escape(line[i:-1]), re.escape(line1[i:-1]))
+                            match = re.match(line[i:-1], line1[i:-1])
                             if match != None:
                                 matches += 1
                 i = i - 1
@@ -66,8 +66,8 @@ def text(doc, morphemes, result):
     fTextP = open(result, 'w', encoding = 'utf8')
     for word in fText:
         word = word.lower()
-        word = word.strip('[()«»“”„=\'",.†—%<>-—„”?!:;]')
-        word = re.sub('[\(\)«»“”„\[\]=\\\'\"\,\.†—%\<\>\—„”\?\!\:\;]', '', word)
+        word = word.strip('[()«»“”„=\'",.†—%<>-—„”?!:;*]')
+        word = re.sub('[\(\)«»“”„\[\]=\\\'\"\,\.†—%\<\>\—„”\?\!\:\;\*]', '', word)
         i = -1
         root = word
         morph = ''
@@ -81,6 +81,6 @@ def text(doc, morphemes, result):
         fTextP.write(root + ' + ' + morph + '\n')
     fTextP.close()
 
-#dictionary('C:\\Users\\Lyubov\\Documents\\kirgiz\\text\\AA', 'C:\\Users\\Lyubov\\Documents\\kirgiz\\my_dic.txt')
+dictionary('C:\\Users\\Lyubov\\Documents\\kirgiz\\text\\AA', 'C:\\Users\\Lyubov\\Documents\\kirgiz\\my_dic.txt')
 morphemes('C:\\Users\\Lyubov\\Documents\\kirgiz\\my_dic.txt', 'C:\\Users\\Lyubov\\Documents\\kirgiz\\morphs.txt')
 text('C:\\Users\\Lyubov\\Documents\\kirgiz\\text.txt', 'C:\\Users\\Lyubov\\Documents\\kirgiz\\morphs.txt', 'C:\\Users\\Lyubov\\Documents\\kirgiz\\text_parsed.txt')
